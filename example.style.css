@@ -1,0 +1,55 @@
+/**
+ * @note CSS reset
+ */
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+body {
+  line-height: 1.5;
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  background-color: rgba(50, 50, 50, 0.1);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/**
+  * example app css
+  */
+#root {
+  position: relative;
+  min-height: 100%;
+}
+
+.example {
+  font-family: sans-serif;
+  text-align: center;
+  min-height: 100%;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.example-inner {
+  width: 75%;
+  padding: 24px;
+}

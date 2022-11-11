@@ -1,0 +1,289 @@
+/**
+ * @note
+ *  FileDownloader - component's root element
+ *  - scoped resets
+ *  - scoped variables
+ */
+
+.fd * {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.fd p,
+.fd ul {
+  padding: 0;
+  margin: 0;
+}
+
+.fd div {
+  width: 100%;
+}
+
+.fd button {
+  appearance: none;
+  border: none;
+  background-color: var(--color-transparent);
+}
+
+.fd input[type='checkbox'] {
+  accent-color: var(--color-checkbox);
+}
+
+.fd {
+  --width: 8px;
+  --padding: 8px;
+  --margin: 8px;
+  --color-active: #81d134;
+  --color-bg-default: #ffffff;
+  --color-bg-light: #fafafa;
+  --color-bg-medium: #f5f5f5;
+  --color-bg-dark: #eeeeee;
+  --color-bg-overlay: rgba(0, 0, 0, 0.3);
+  --color-checkbox: #5097e3;
+  --color-font-default: #4b4b4b;
+  --color-line: #e5e5e5;
+  --color-transparent: transparent;
+}
+
+.fd {
+  position: relative;
+  padding: calc(var(--padding) / 2);
+  width: 100%;
+  color: var(--color-font-default);
+  background-color: var(--color-bg-default);
+}
+
+.fd-inner {
+  background-color: var(--color-bg-default);
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+/**
+ * @note
+ *  FDControl styles
+ */
+
+.fd-ctrl {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.fd-ctrl > li {
+  padding: calc(var(--padding) * 2) var(--padding);
+}
+
+/**
+ * @note
+ *  FDControl > download selected button
+ */
+.fd-ctrl .fd-dl-select-count {
+  font-size: medium;
+}
+
+/**
+ * @note
+ *  FDControl > download selected button
+ */
+.fd-ctrl .fd-dl-selected {
+  flex-grow: 1;
+  display: flex;
+}
+
+.fd-ctrl .fd-dl-selected {
+  display: flex;
+  align-items: center;
+}
+
+.fd-ctrl .fd-dl-selected img {
+  width: calc(var(--width) * 2.5);
+  height: calc(var(--width) * 2.5);
+  object-fit: contain;
+}
+
+.fd-ctrl .fd-dl-selected button {
+  color: var(--color-font-default);
+  font-size: medium;
+}
+
+/**
+ * @note
+ *  FDHeader styles
+ */
+.fd-header {
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  border-top: solid 1px var(--color-line);
+  border-bottom: solid 1px var(--color-line);
+}
+
+.fd-header li {
+  flex-basis: 120px;
+  flex-shrink: 0;
+  padding: var(--padding);
+  text-align: left;
+  text-transform: capitalize;
+}
+
+.fd-header li.fd-header- {
+  flex-basis: calc(var(--width) * 8);
+}
+
+.fd-header li.fd-header-path {
+  flex-grow: 1;
+}
+
+/**
+ * @note
+ *  FDBody styles
+ */
+.fd-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.fd-body .fd-body-row > ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0;
+  border-bottom: solid 1px var(--color-line);
+}
+
+/**
+ * @note
+ *  FDBody > selected state
+ */
+.fd-body .fd-body-row:hover {
+  background-color: var(--color-bg-medium);
+}
+
+.fd-body .fd-body-row.fd-body-row-selected {
+  background-color: var(--color-bg-dark);
+}
+
+.fd-body .fd-body-cell {
+  position: relative;
+  padding: var(--padding);
+  flex-basis: calc(var(--width) * 15);
+  flex-grow: 0;
+  text-align: left;
+}
+
+.fd-body .fd-body-cell.fd-body-checkbox {
+  flex-basis: calc(var(--width) * 8);
+}
+
+.fd-body .fd-body-cell.fd-body-path {
+  flex-grow: 1;
+}
+
+.fd-body .fd-body-cell.fd-body-status {
+  flex-basis: calc(var(--width) * 18);
+  padding-left: calc(var(--padding) * 4);
+  text-transform: capitalize;
+}
+
+/**
+ * @note
+ *  FDBody > status available
+ */
+.fd-body .fd-body-cell.fd-body-status[data-value='available']::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--width) * 1.5);
+  top: calc(var(--width) * 1.5);
+  width: calc(var(--width) * 2);
+  height: calc(var(--width) * 2);
+  background-color: var(--color-active);
+  border-radius: 50%;
+}
+
+/**
+ * @note
+ *  FDModal styles
+ */
+.fd-modal {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: var(--color-bg-overlay);
+}
+
+.fd-modal > div {
+  width: 50%;
+  padding: var(--padding);
+  border-radius: var(--width);
+  background-color: var(--color-bg-default);
+}
+
+.fd-modal .fd-modal-header {
+  height: calc(var(--width) * 4);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.fd-modal .fd-modal-closebtn {
+  padding: calc(var(--padding) * 2);
+  color: var(--color-font-default);
+  text-align: center;
+}
+
+.fd-modal .fd-modal-body {
+  min-height: 25%;
+  max-height: 75%;
+  overflow-y: auto;
+  padding-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/**
+ * @note
+ *  FDModal > file
+ */
+.fd-file {
+  padding: var(--padding);
+  text-align: left;
+}
+
+.fd-file:nth-of-type(2n) {
+  background-color: var(--color-bg-light);
+}
+
+.fd-file > p {
+  color: var(--color-font-default);
+}
+
+.fd-file > span {
+  font-size: small;
+}
+
+/**
+ * @note
+ *  css utilities
+ *  - cursor pointer
+ *  - text ellipsis
+ */
+.fd-cursor,
+.fd-cursor input[type='checkbox'],
+.fd-cursor button {
+  cursor: pointer;
+}
+
+.fd-ellipse {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
