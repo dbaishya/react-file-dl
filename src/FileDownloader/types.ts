@@ -10,23 +10,23 @@
  */
 
 export type FDFile = {
-  name: string; // 'smss.exe'
-  device: string; // 'Stark',
-  path: string; // '\\Device\\HarddiskVolume2\\Windows\\System32\\smss.exe',
-  status: 'available' | 'scheduled';
-};
+  name: string // 'smss.exe'
+  device: string // 'Stark',
+  path: string // '\\Device\\HarddiskVolume2\\Windows\\System32\\smss.exe',
+  status: 'available' | 'scheduled'
+}
 
 /**
  * @note
  *  helper util
  */
-type ValueOf<T> = T[keyof T];
+type ValueOf<T> = T[keyof T]
 
 /**
  * @note
  *  unique ID - in the absence of an unique ID in the file
  *  object, we are using its `path` property as the ID.
  */
-export type FDFileId = ValueOf<Pick<FDFile, 'path'>>;
+export type FDFileId = ValueOf<Pick<FDFile, 'path'>>
 
-export type FDFileStatus = ValueOf<Pick<FDFile, 'status'>>;
+export type FDFileStatus = ValueOf<Pick<FDFile, 'status'>>

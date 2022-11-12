@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { mockData } from './FileDownloader/__mocks__/mock.data';
-import FileDownloader, { FDFile } from './FileDownloader';
-import './example.style.css';
+import React from 'react'
+import { mockData } from '../FileDownloader/__mocks__/mock.data'
+import FileDownloader, { FDFile } from '../FileDownloader'
+import './example.style.css'
 
 export default function Example() {
   return (
@@ -12,5 +12,5 @@ export default function Example() {
         <FileDownloader files={mockData as FDFile[]} />
       </div>
     </div>
-  );
+  )
 }

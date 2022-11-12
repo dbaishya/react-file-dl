@@ -5,9 +5,15 @@ export const mockData = [
    * @fix-me *** REMOVE ***
    */
   {
-    name: 'dummy.pdf',
-    device: 'Local (macOS)',
-    path: '/Users/dhrubabaishya/Downloads/dummy.pdf',
+    name: 'Zoom.pkg',
+    device: 'Local',
+    path: '/Users/dhrubabaishya/Downloads/Zoom.pkg',
+    status: 'available',
+  },
+  {
+    name: 'Figma.zip',
+    device: 'Remote',
+    path: 'https://www.figma.com/download/desktop/mac',
     status: 'available',
   },
   {
@@ -43,4 +49,4 @@ export const mockData = [
     path: '\\Device\\HarddiskVolume1\\temp\\7za.exe',
     status: 'scheduled',
   },
-];
+]

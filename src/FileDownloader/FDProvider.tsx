@@ -1,5 +1,5 @@
-import * as React from 'react';
-import type { FDFile, FDFileId } from './types';
+import * as React from 'react'
+import type { FDFile, FDFileId } from './types'
 
 const {
   useReducer,
@@ -9,21 +9,21 @@ const {
   useMemo,
   useRef,
   useEffect,
-} = React;
+} = React
 
 export type FDState = {
-  allFiles: FDFile[];
-  selectedFileIds: FDFileId[];
-  isAllFilesSelected: boolean;
-  isDownloadSelected: boolean;
-};
+  allFiles: FDFile[]
+  selectedFileIds: FDFileId[]
+  isAllFilesSelected: boolean
+  isDownloadSelected: boolean
+}
 
 export type FDAction =
   | {
-      type: 'LOAD_FILES';
+      type: 'LOAD_FILES'
       payload: {
-        files: FDFile[];
-      };
+        files: FDFile[]
+      }
     }
   /**
    * @note
@@ -35,7 +35,7 @@ export type FDAction =
    *      a browser or remote store
    */
   | {
-      type: 'TOGGLE_SELECT_ALL_FILES';
+      type: 'TOGGLE_SELECT_ALL_FILES'
     }
   /**
    * @note
@@ -45,10 +45,10 @@ export type FDAction =
    *      - model state changes are driving the visual state changes
    */
   | {
-      type: 'TOGGLE_SELECT_FILE';
+      type: 'TOGGLE_SELECT_FILE'
       payload: {
-        id: FDFileId;
-      };
+        id: FDFileId
+      }
     }
   /**
    * @note
@@ -56,25 +56,25 @@ export type FDAction =
    *  file needs to be updated, this action can be used.
    */
   | {
-      type: 'SET_DOWNLOAD_STATUS';
+      type: 'SET_DOWNLOAD_STATUS'
       payload: {
-        id: FDFileId;
-        status: 'available' | 'scheduled';
-      };
+        id: FDFileId
+        status: 'available' | 'scheduled'
+      }
     }
   | {
-      type: 'DOWNLOAD_SELECTED';
+      type: 'DOWNLOAD_SELECTED'
     }
   | {
-      type: 'CLOSE_DOWNLOAD_BOX';
-    };
+      type: 'CLOSE_DOWNLOAD_BOX'
+    }
 
 const initialFDState: FDState = {
   allFiles: [],
   selectedFileIds: [],
   isAllFilesSelected: false,
   isDownloadSelected: false,
-};
+}
 
 const fdReducer = (state: FDState = initialFDState, action: FDAction) => {
   switch (action.type) {
@@ -82,58 +82,58 @@ const fdReducer = (state: FDState = initialFDState, action: FDAction) => {
       return {
         ...state,
         allFiles: action.payload.files,
-      };
+      }
     }
     case 'TOGGLE_SELECT_ALL_FILES': {
-      const { isAllFilesSelected, selectedFileIds, allFiles } = state;
+      const { isAllFilesSelected, selectedFileIds, allFiles } = state
       let partialFDState: Pick<
         FDState,
         'isAllFilesSelected' | 'selectedFileIds'
-      > = { isAllFilesSelected, selectedFileIds };
+      > = { isAllFilesSelected, selectedFileIds }
       if (isAllFilesSelected) {
         // unselet all
         partialFDState = {
           isAllFilesSelected: false,
           selectedFileIds: [],
-        };
+        }
       } else {
         // select all - conditionally
         const selectableFiles = allFiles
           .filter((aFile) => aFile.status === 'available')
-          .map((aFile) => aFile.path);
+          .map((aFile) => aFile.path)
         partialFDState = {
           isAllFilesSelected: selectableFiles.length === allFiles.length,
           selectedFileIds: selectableFiles,
-        };
+        }
       }
       return {
         ...state,
         ...partialFDState,
-      };
+      }
     }
     case 'TOGGLE_SELECT_FILE': {
-      const { allFiles, selectedFileIds } = state;
+      const { allFiles, selectedFileIds } = state
       const {
         payload: { id: clickedFileId },
-      } = action;
-      const clickedFileIndex = selectedFileIds.indexOf(clickedFileId);
-      let selectedFileIdsCopy = [...selectedFileIds];
+      } = action
+      const clickedFileIndex = selectedFileIds.indexOf(clickedFileId)
+      let selectedFileIdsCopy = [...selectedFileIds]
 
       if (clickedFileIndex !== -1) {
         // unselect file
         selectedFileIdsCopy = [
           ...selectedFileIdsCopy.slice(0, clickedFileIndex),
           ...selectedFileIdsCopy.slice(clickedFileIndex + 1),
-        ];
+        ]
       } else {
         // select file - conditionally
         const isSelectedFileAvailable =
           allFiles.filter(
             (aFile) =>
               aFile.path === clickedFileId && aFile.status === 'available'
-          ).length !== 0;
+          ).length !== 0
         if (isSelectedFileAvailable) {
-          selectedFileIdsCopy = [...selectedFileIdsCopy, clickedFileId];
+          selectedFileIdsCopy = [...selectedFileIdsCopy, clickedFileId]
         }
       }
       return {
@@ -141,16 +141,16 @@ const fdReducer = (state: FDState = initialFDState, action: FDAction) => {
         isAllFilesSelected:
           selectedFileIdsCopy.length === state.allFiles.length,
         selectedFileIds: [...selectedFileIdsCopy],
-      };
+      }
     }
     case 'SET_DOWNLOAD_STATUS': {
       const {
         payload: { id: updatingFileId, status: newFileStatus },
-      } = action;
-      const { allFiles } = state;
+      } = action
+      const { allFiles } = state
       const updatingFileIndex = allFiles.findIndex(
         (aFile) => aFile.path === updatingFileId
-      )[0];
+      ) as any[0]
 
       return {
         ...state,
@@ -162,77 +162,77 @@ const fdReducer = (state: FDState = initialFDState, action: FDAction) => {
           },
           ...allFiles.slice(updatingFileIndex + 1),
         ],
-      };
+      }
     }
     case 'DOWNLOAD_SELECTED': {
       return {
         ...state,
         isDownloadSelected: true,
-      };
+      }
     }
     case 'CLOSE_DOWNLOAD_BOX': {
       return {
         ...state,
         isDownloadSelected: false,
-      };
+      }
     }
     default:
-      return { ...state };
+      return { ...state }
   }
-};
+}
 
 const FDContext = createContext<{
-  state: FDState;
-  dispatch: React.Dispatch<FDAction>;
+  state: FDState
+  dispatch: React.Dispatch<FDAction>
 }>({
   state: initialFDState,
   dispatch: () => null,
-});
+})
 
 type FDProviderProps = {
-  files: FDFile[];
-  children: React.ReactNode;
-};
+  files: FDFile[]
+  children: React.ReactNode
+}
 
 const FDProvider = ({ files, children }: FDProviderProps) => {
-  const reducer = useCallback(fdReducer, [files]);
-  const [state, dispatch] = useReducer(reducer, initialFDState);
+  const reducer = useCallback(fdReducer, [files])
+  const [state, dispatch] = useReducer(reducer, initialFDState)
 
   const memoizedValue = useMemo(() => {
     return {
       state,
       dispatch,
-    };
-  }, [state, dispatch]);
+    }
+  }, [state, dispatch])
 
-  const isInitialRenderRef = useRef(true);
+  const isInitialRenderRef = useRef(true)
 
   useEffect(() => {
     if (!isInitialRenderRef.current) {
       dispatch({
         type: 'LOAD_FILES',
         payload: { files },
-      });
+      })
     }
-  }, [files, dispatch]);
+  }, [files, dispatch])
 
   useEffect(() => {
-    isInitialRenderRef.current = false;
-  }, []);
+    isInitialRenderRef.current = false
+  }, [])
 
   return (
     <FDContext.Provider value={{ ...memoizedValue }}>
       {children}
     </FDContext.Provider>
-  );
-};
+  )
+}
 
 /**
  * @note
  *  utility hook
  */
 const useFD = () => {
-  return useContext(FDContext);
-};
+  return useContext(FDContext)
+}
 
-export { FDContext, FDProvider, useFD };
+export { FDContext, FDProvider, useFD }

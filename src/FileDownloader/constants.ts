@@ -21,4 +21,4 @@ export const constants = {
       selectAria: 'Select file',
     },
   },
-};
+}

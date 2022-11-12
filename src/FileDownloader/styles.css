@@ -5,7 +5,7 @@
  *  - scoped variables
  */
 
-.fd * {
+ .fd * {
   box-sizing: border-box;
   font-family: sans-serif;
 }
@@ -76,7 +76,7 @@
 
 /**
  * @note
- *  FDControl > download selected button
+ *  FDControl > selected count label
  */
 .fd-ctrl .fd-dl-select-count {
   font-size: medium;
@@ -190,7 +190,7 @@
  * @note
  *  FDBody > status available
  */
-.fd-body .fd-body-cell.fd-body-status[data-value='available']::before {
+.fd-body .fd-body-cell.fd-body-status p[data-value='available']::before {
   content: '';
   position: absolute;
   left: calc(var(--width) * 1.5);

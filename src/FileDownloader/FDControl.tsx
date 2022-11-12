@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { constants } from './constants';
-import { useFD } from './FDProvider';
-import { downloadFile } from './utils';
+import * as React from 'react'
+import { constants } from './constants'
+import { useFD } from './FDProvider'
+import { downloadFile } from './utils'
 
-const { useCallback, useEffect } = React;
+const { useCallback, useEffect } = React
 
 const {
   labels: {
@@ -17,48 +17,47 @@ const {
       unselectAllAria,
     },
   },
-} = constants;
+} = constants
 
 export const FDControl = () => {
   const {
     state: { allFiles, selectedFileIds, isAllFilesSelected },
     dispatch,
-  } = useFD();
-  const checkboxRef = React.useRef<HTMLInputElement>(null);
+  } = useFD()
+  const checkboxRef = React.useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    const isSomeFilesSelected = selectedFileIds.length !== 0;
+    const isSomeFilesSelected = selectedFileIds.length !== 0
     if (checkboxRef.current) {
       checkboxRef.current.indeterminate =
-        !isAllFilesSelected && isSomeFilesSelected;
+        !isAllFilesSelected && isSomeFilesSelected
     }
-  }, [isAllFilesSelected, selectedFileIds]);
+  }, [isAllFilesSelected, selectedFileIds])
 
   const handleToggleSelectAllFiles = useCallback(
     (_event: React.ChangeEvent<HTMLInputElement>) => {
       dispatch({
         type: 'TOGGLE_SELECT_ALL_FILES',
-      });
+      })
     },
     [dispatch]
-  );
+  )
 
   const handleDownloadSelected = useCallback(() => {
     const dlFiles = allFiles.filter(
       (aFile) => selectedFileIds.indexOf(aFile.path) !== -1
-    );
+    )
     if (dlFiles.length > 0) {
       dispatch({
         type: 'DOWNLOAD_SELECTED',
-      });
+      })
       dlFiles.forEach((aFile) => {
-        downloadFile(aFile);
-      });
+        downloadFile(aFile)
+      })
     }
-  }, [allFiles, selectedFileIds, dispatch]);
+  }, [allFiles, selectedFileIds, dispatch])
 
-  const selectedFileCount = selectedFileIds.length;
-  const isSomeFilesSelected = !isAllFilesSelected && selectedFileCount;
+  const selectedFileCount = selectedFileIds.length
 
   return (
     /**
@@ -94,5 +93,5 @@ export const FDControl = () => {
         <button>{dlSelected}</button>
       </li>
     </ul>
-  );
-};
+  )
+}

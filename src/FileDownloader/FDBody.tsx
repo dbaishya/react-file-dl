@@ -1,30 +1,30 @@
-import * as React from 'react';
-import { useFD } from './FDProvider';
-import { constants } from './constants';
-import type { FDFileId, FDFileStatus } from './types';
+import * as React from 'react'
+import { useFD } from './FDProvider'
+import { constants } from './constants'
+import type { FDFileId, FDFileStatus } from './types'
 
-const { useCallback } = React;
+const { useCallback } = React
 const {
   labels: {
     fdBody: { selectAria },
   },
-} = constants;
+} = constants
 
-const noop = () => {};
+const noop = () => {}
 
 export const FDBody = () => {
   const {
     state: { allFiles, selectedFileIds },
     dispatch,
-  } = useFD();
+  } = useFD()
 
   const handleOnClick = useCallback(
     ({
       fileId,
       fileStatus,
     }: {
-      fileId: FDFileId;
-      fileStatus: FDFileStatus;
+      fileId: FDFileId
+      fileStatus: FDFileStatus
     }) => {
       /**
        * @note
@@ -39,26 +39,26 @@ export const FDBody = () => {
           payload: {
             id: fileId,
           },
-        });
+        })
       }
     },
     [dispatch]
-  );
+  )
 
   if (!allFiles.length) {
-    return null;
+    return null
   }
 
   return (
     <ul className="fd-body">
       {allFiles.map((aFile, outerIndex) => {
-        const { name, path, status } = aFile;
-        const key = `${name}-${outerIndex}`;
+        const { name, path, status } = aFile
+        const key = `${name}-${outerIndex}`
         // @ts-ignore
-        const aFileValues = ['', ...Object.entries(aFile)];
+        const aFileValues = ['', ...Object.entries(aFile)]
         // @note
         //  Array.prototype.includes is not supported by the IDE
-        const isFileSelected = selectedFileIds.indexOf(path) !== -1;
+        const isFileSelected = selectedFileIds.indexOf(path) !== -1
         return (
           <li
             key={key}
@@ -96,12 +96,12 @@ export const FDBody = () => {
                       </p>
                     )}
                   </li>
-                );
+                )
               })}
             </ul>
           </li>
-        );
+        )
       })}
     </ul>
-  );
-};
+  )
+}
