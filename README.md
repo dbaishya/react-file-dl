@@ -1,6 +1,4 @@
-### Requirements:
-
-**Confidential:** available in the recruiter's [email](https://mail.google.com/mail/u/0/?zx=ff5jycyn29hy#inbox/FMfcgzGqRGfPnBqNFDShKmvKLGLXRTDz) only.
+### Requirements: **Confidential**
 
 ---
 
@@ -9,16 +7,18 @@
 #### Questions:
 
 1. For req #1 - are files with "scheduled" status selectable? Asking for clarification between selectable file versus downloadable file.
-2. For req #9 - what is the expected UI for the alert box? It can be as simple as a native browser alert, download prompt, or a custom modal window.
+2. For req #7 - is intermediate state to unselected state a valid transition?
+3. For req #9 - what is the expected UI for the alert box? It can be as simple as a native browser alert, download prompt, or a custom modal window.
 
 #### Assumptions:
 
 1. Selectable vs Downloadable - **Assumption:** if status of the file is 'scheduled', they are neither selectable nor downloadable.
-2. Data - can be passed to the FD component from the parent component, or it can assume the responsibility of fetching data from passed endpoint URL. **Assumption:** file data is passed to the FD component.
-3. Pagination - some form dynamic or configurable pagination may be needed if FD component needs to handle large number of files. This is important from both UX and performance perspectives. **Assumption:** FD component needs to handle a few dozen files.
-4. Responsive/Mobile UI - provided mock appears to be created for the desktop web environment. **Assumption:** limited or no support is required for mobile web environments.
-5. Alert Box - since alert box can be anything from a window alert to a custom modal. **Assumption:** using a custom modal with scrollable content.
-6. File paths - are different for macOS/linux and windows OS. **Assumption:** delegating the responsibility of passing valid file path to the consumer of the FD component.
+2. Unselect all -
+3. Data - can be passed to the FileDownloader from the parent component, or it can assume the responsibility of fetching data from a passed endpoint URL. **Assumption:** file data is passed to the FileDownloader.
+4. Pagination - some form dynamic or configurable pagination may be needed - if FD component needs to handle large number of files. This is important from both UX and performance perspectives. **Assumption:** FileDownloader needs to handle a few dozen files only.
+5. Responsive/Mobile UI - provided mock appears to be created for the desktop web environment. **Assumption:** limited or no support is required for mobile web environments.
+6. Alert Box - **Assumption:** use a custom modal with scrollable contents.
+7. File paths - are different for linux/macOS and windows OS. **Assumption:** delegating the responsibility of passing valid file paths to the consumer of the FileDownloader.
 
 #### Notes
 

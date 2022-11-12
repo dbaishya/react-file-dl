@@ -91,7 +91,8 @@ const fdReducer = (state: FDState = initialFDState, action: FDAction) => {
         'isAllFilesSelected' | 'selectedFileIds'
       > = { isAllFilesSelected, selectedFileIds }
       if (isAllFilesSelected) {
-        // unselet all
+        // unselect all
+        // @note: ref to Questions #2 in README
         partialFDState = {
           isAllFilesSelected: false,
           selectedFileIds: [],
@@ -208,7 +209,7 @@ const FDProvider = ({ files, children }: FDProviderProps) => {
   const isInitialRenderRef = useRef(true)
 
   useEffect(() => {
-    if (!isInitialRenderRef.current) {
+    if (isInitialRenderRef.current) {
       dispatch({
         type: 'LOAD_FILES',
         payload: { files },
