@@ -1,7 +1,4 @@
-import * as React from 'react'
-import type { FDFile, FDFileId } from './types'
-
-const {
+import React, {
   useReducer,
   createContext,
   useContext,
@@ -9,7 +6,8 @@ const {
   useMemo,
   useRef,
   useEffect,
-} = React
+} from 'react'
+import type { FDFile, FDFileId } from './types'
 
 export type FDState = {
   allFiles: FDFile[]

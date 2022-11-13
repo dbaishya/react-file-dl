@@ -1,9 +1,8 @@
-import * as React from 'react'
+import React, { useCallback } from 'react'
 import { useFD } from './FDProvider'
 import { constants } from './constants'
 import type { FDFileId, FDFileStatus } from './types'
 
-const { useCallback } = React
 const {
   labels: {
     fdBody: { selectAria },

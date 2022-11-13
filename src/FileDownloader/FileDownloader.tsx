@@ -1,10 +1,11 @@
-import * as React from 'react'
+import React from 'react'
 import { FDBody } from './FDBody'
 import { FDControl } from './FDControl'
 import { FDHeader } from './FDHeader'
-import { FDModal } from './FDModal'
 import { FDProvider } from './FDProvider'
+import { LazyFDModal } from './LazyFDModal'
 import type { FDFile } from './types'
+
 /**
  * @note
  *  CSS-in-JS library would be an alt recommendation
@@ -26,7 +27,7 @@ export const FileDownloader = ({ files }: FileDownloaderProps) => {
           <FDHeader />
           <FDBody />
         </div>
-        <FDModal />
+        <LazyFDModal />
       </div>
     </FDProvider>
   )

@@ -1,8 +1,6 @@
-import * as React from 'react'
+import React, { useCallback } from 'react'
 import { useFD } from './FDProvider'
 import { constants } from './constants'
-
-const { useCallback } = React
 
 const {
   labels: {
@@ -10,7 +8,7 @@ const {
   },
 } = constants
 
-export const FDModal = () => {
+export default function FDModal() {
   const {
     state: { allFiles, selectedFileIds, isDownloadSelected },
     dispatch,

@@ -1,9 +1,7 @@
-import * as React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { constants } from './constants'
 import { useFD } from './FDProvider'
 import { downloadFile } from './utils'
-
-const { useCallback, useEffect } = React
 
 const {
   labels: {
