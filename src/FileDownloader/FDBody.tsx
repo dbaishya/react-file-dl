@@ -53,11 +53,8 @@ export const FDBody = () => {
       {allFiles.map((aFile, outerIndex) => {
         const { name, path, status } = aFile
         const key = `${name}-${outerIndex}`
-        // @ts-ignore
         const aFileValues = ['', ...Object.entries(aFile)]
-        // @note
-        //  Array.prototype.includes is not supported by the IDE
-        const isFileSelected = selectedFileIds.indexOf(path) !== -1
+        const isFileSelected = selectedFileIds.includes(path)
         return (
           <li
             key={key}

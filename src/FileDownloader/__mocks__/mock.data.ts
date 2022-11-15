@@ -1,21 +1,20 @@
 export const mockData = [
   /**
    * @note
-   *  mock data for local macOS
-   * @fix-me *** REMOVE ***
+   *  uncomment mock data for local testing
    */
-  {
-    name: 'Zoom.pkg',
-    device: 'Local',
-    path: '/Users/dhrubabaishya/Downloads/Zoom.pkg',
-    status: 'available',
-  },
-  {
-    name: 'Figma.zip',
-    device: 'Remote',
-    path: 'https://www.figma.com/download/desktop/mac',
-    status: 'available',
-  },
+  // {
+  //   name: 'Zoom.pkg',
+  //   device: 'Local',
+  //   path: '/Users/guest/Downloads/Zoom.pkg',
+  //   status: 'available',
+  // },
+  // {
+  //   name: 'Figma.zip',
+  //   device: 'Remote',
+  //   path: 'https://www.figma.com/download/desktop/mac',
+  //   status: 'available',
+  // },
   {
     name: 'smss.exe',
     device: 'Stark',
@@ -50,3 +49,10 @@ export const mockData = [
     status: 'scheduled',
   },
 ]
+
+export const mockState = {
+  allFiles: [...mockData],
+  selectedFileIds: [],
+  isAllFilesSelected: false,
+  isDownloadSelected: false,
+}
