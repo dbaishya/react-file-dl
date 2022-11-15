@@ -28,7 +28,7 @@
 Clone repo
 
 ```
-$: git clone <BUNDLE_PATH>
+$: git clone react-fl-dl.bundle react-fl-dl
 ```
 
 Go to project directory
